@@ -1,0 +1,33 @@
+{
+  "name": "angular2-asset-versioner",
+  "version": "0.0.1",
+  "description": "Version angular2 assets (css, js)",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hot-type": "tsc -w",
+    "typings": "typings install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bombadillo/angular2-asset-versioner.git"
+  },
+  "keywords": [
+    "angular2",
+    "versioning"
+  ],
+  "author": "bombadillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bombadillo/angular2-asset-versioner/issues"
+  },
+  "homepage": "https://github.com/bombadillo/angular2-asset-versioner#readme",
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "typings": "^1.0.4"
+  },
+  "dependencies": {
+    "glob": "7.0.6",
+    "q": "1.4.1"
+  }
+}
