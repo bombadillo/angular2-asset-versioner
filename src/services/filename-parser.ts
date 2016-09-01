@@ -1,27 +1,36 @@
 import { FileInfo } from '../models/file-info';
+import { FileVersionAssigner } from './file-version-assigner';
 
 var path = require('path');
 
 export class FileNameParser {
 
-    parse = (files: string[]) => {
-      var parsedFiles : FileInfo[] = []; 
+  fileVersionAssigner: FileVersionAssigner;
 
-      for (let filePath of files) {
-        var fileName = path.basename(filePath);
-        var indexOfExtensionStart = fileName.lastIndexOf(".");
-        var fileInfo : FileInfo = { 
-          path: filePath,
-          fileName: fileName.substr(0, indexOfExtensionStart),
-          extension: fileName.substr(indexOfExtensionStart + 1, fileName.length - 1),
-          originalFileName: fileName,
-          versionedFileName: ''
-        }    
+  constructor () {
+    this.fileVersionAssigner = new FileVersionAssigner();
+  }
 
-        parsedFiles.push(fileInfo);
-      }
+  parse = (files: string[]) => {
+    var parsedFiles : FileInfo[] = []; 
 
-      return parsedFiles;
+    for (let filePath of files) {
+      var fileName = path.basename(filePath);
+      var indexOfExtensionStart = fileName.lastIndexOf(".");
+      var fileInfo : FileInfo = { 
+        path: filePath,
+        fileName: fileName.substr(0, indexOfExtensionStart),
+        extension: fileName.substr(indexOfExtensionStart + 1, fileName.length - 1),
+        originalFileName: fileName,
+        versionedFileName: ''
+      }    
+
+      fileInfo = this.fileVersionAssigner.assignVersion(fileInfo);
+
+      parsedFiles.push(fileInfo);
     }
+
+    return parsedFiles;
+  }
 
 }

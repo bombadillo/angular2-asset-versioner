@@ -28,7 +28,7 @@ export class CssVersioner {
 
         this.fileReader.readFile(assetReferencingFile).then((fileContents: string) => {
           for (let cssFile of parsedCssFiles) {
-            fileContents = this.assetNameReplacer.replace(fileContents, cssFile.originalFileName, 'blerg');
+            fileContents = this.assetNameReplacer.replace(fileContents, cssFile.originalFileName, cssFile.versionedFileName);
           }         
 
           this.fileWriter.write(assetReferencingFile, fileContents).then(() => {
