@@ -1,43 +1,43 @@
-import { CssFileRetriever } from './css-file-retriever';
+import { FileRetriever } from './file-retriever';
 import { FileNameParser } from './filename-parser';
 import { FileWriter } from './file-writer';
 import { FileRenamer } from './file-renamer';
 import { StringInstanceReplacer} from './string-instance-replacer';
 
-export class CssVersioner {
+export class Versioner {
   
-  cssFileRetriever: CssFileRetriever;
+  fileRetriever: FileRetriever;
   fileNameParser: FileNameParser;
   fileWriter: FileWriter;
   fileRenamer: FileRenamer;
   stringInstanceReplacer: StringInstanceReplacer;
 
-  parsedCssFiles;
+  parsedFiles;
   fileContents;
 
   assetReferencingFile = 'src/test/index.html';
 
   constructor() {
-    this.cssFileRetriever = new CssFileRetriever();    
+    this.fileRetriever = new FileRetriever();    
     this.fileNameParser = new FileNameParser();    
     this.fileWriter = new FileWriter();
     this.fileRenamer = new FileRenamer();
     this.stringInstanceReplacer = new StringInstanceReplacer();
   }
 
-  version = () => {
+  version = (fileSearch) => {
     return new Promise((fulfill, reject) => {      
-      this.cssFileRetriever.retrieve('**/*.css')
+      this.fileRetriever.retrieve(fileSearch)
         .then((files: string[]) => {    
-          this.parsedCssFiles = this.fileNameParser.parse(files);      
-          return this.stringInstanceReplacer.replaceInstances(this.assetReferencingFile, this.parsedCssFiles);                                          
+          this.parsedFiles = this.fileNameParser.parse(files);      
+          return this.stringInstanceReplacer.replaceInstances(this.assetReferencingFile, this.parsedFiles);                                          
         })
         .then((fileContents) => {
           this.fileContents = fileContents;
           return this.fileWriter.write(this.assetReferencingFile, fileContents);             
         })
         .then(() => {
-          var actions = this.parsedCssFiles.map(this.fileRenamer.rename);
+          var actions = this.parsedFiles.map(this.fileRenamer.rename);
           var results = Promise.all(actions);
 
           results.then(data => {

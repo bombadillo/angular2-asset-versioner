@@ -1,6 +1,6 @@
 var glob = require('glob');
 
-export class CssFileRetriever {
+export class FileRetriever {
   retrieve = (path) => {
     var options = {ignore: 'node_modules/**'}; 
 

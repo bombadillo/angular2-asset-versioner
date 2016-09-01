@@ -1,17 +1,17 @@
-import { CssVersioner } from './services/css-versioner';
+import { Versioner } from './services/versioner';
 
 export class AngularTwoVersioner {
     
-  cssVersioner: CssVersioner;
+  versioner: Versioner;
 
   constructor () {
-    this.cssVersioner = new CssVersioner();
+    this.versioner = new Versioner();
   }  
 
   version = () => {
     console.log('versioning');
 
-    this.cssVersioner.version()
+    this.versioner.version('**/*.css')
       .then(() => {
         console.log('\n 😊 done 😊');
         process.exit();
