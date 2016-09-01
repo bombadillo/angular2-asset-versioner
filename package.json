@@ -1,6 +1,6 @@
 {
   "name": "angular2-asset-versioner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Version angular2 assets (css, js)",
   "main": "dist/index.js",
   "scripts": {
