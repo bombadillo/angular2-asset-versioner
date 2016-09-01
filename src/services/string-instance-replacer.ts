@@ -1,12 +1,14 @@
 import { FileReader } from './file-reader';
 import { FileWriter } from './file-writer';
 import { AssetNameReplacer } from './asset-name-replacer';
+import { FilesToUpdateRetriever } from './files-to-update-retriever';
 
 export class StringInstanceReplacer {
 
   fileReader: FileReader;
   fileWriter: FileWriter;
   assetNameReplacer: AssetNameReplacer;
+  filesToUpdateRetriever: FilesToUpdateRetriever;
 
   filesToReplace;
 
@@ -14,19 +16,22 @@ export class StringInstanceReplacer {
     this.fileReader = new FileReader();
     this.fileWriter = new FileWriter();
     this.assetNameReplacer = new AssetNameReplacer();
+    this.filesToUpdateRetriever = new FilesToUpdateRetriever();
   }
 
   replaceInstances = (files) => {
     this.filesToReplace = files;
-    var filesToReplace = ['src/test/index.html', 'src/test/app/app.component.ts'];
+    
     return new Promise((fulfill, reject) => {
-      var actions = filesToReplace.map(this.replaceInstance);
-      var results = Promise.all(actions);
+      this.filesToUpdateRetriever.retrieve().then((assetReferencingFiles: string[]) => {
+        var actions = assetReferencingFiles.map(this.replaceInstance);
+        var results = Promise.all(actions);
 
-      results.then(data => {
-        console.log('updated files');
-        fulfill(data);
-      });       
+        results.then(data => {
+          console.log('updated files');
+          fulfill(data);
+        });       
+      });      
     });      
   }
 
