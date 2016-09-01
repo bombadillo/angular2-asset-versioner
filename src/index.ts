@@ -13,8 +13,10 @@ export class AngularTwoVersioner {
 
     this.versioner.version('**/*.css')
       .then(() => {
+        return this.versioner.version('src/test/**/*.js');
+      }).then(() => {
         console.log('\n 😊 done 😊');
-        process.exit();
+        process.exit();        
       });    
   }
 
