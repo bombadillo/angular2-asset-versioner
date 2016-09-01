@@ -18,7 +18,7 @@ export class FileNameParser {
       var fileName = path.basename(filePath);
       var indexOfExtensionStart = fileName.lastIndexOf(".");
       var fileInfo : FileInfo = { 
-        path: filePath,
+        path: path.dirname(filePath),
         fileName: fileName.substr(0, indexOfExtensionStart),
         extension: fileName.substr(indexOfExtensionStart + 1, fileName.length - 1),
         originalFileName: fileName,
