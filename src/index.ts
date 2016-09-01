@@ -13,7 +13,7 @@ export class AngularTwoVersioner {
 
     this.cssVersioner.version()
       .then(() => {
-        console.log('😊 done 😊');
+        console.log('\n 😊 done 😊');
         process.exit();
       });    
   }
