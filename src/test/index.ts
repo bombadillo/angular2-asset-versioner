@@ -1,4 +1,8 @@
 import { AngularTwoVersioner } from '../index';
 
-new AngularTwoVersioner().version();
+var options = {
+  excludeFiles: ["bundle.js"]
+};
+
+new AngularTwoVersioner(options).version();
 
