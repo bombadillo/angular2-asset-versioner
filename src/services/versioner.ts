@@ -31,7 +31,6 @@ export class Versioner {
           var results = Promise.all(actions);
 
           results.then(data => {
-            console.log(data)
             fulfill(true);
           });             
         });      
