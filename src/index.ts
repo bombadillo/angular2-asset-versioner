@@ -7,13 +7,11 @@ export class AngularTwoVersioner {
   config: Config;
 
   constructor (options?) {
-    this.versioner = new Versioner();
     this.config = new Config(options);
+    this.versioner = new Versioner();    
   }  
 
   version = () => {
-    console.log('versioning');
-
     this.versioner.version('**/*.css')
       .then(() => {
         return this.versioner.version('**/*.js');

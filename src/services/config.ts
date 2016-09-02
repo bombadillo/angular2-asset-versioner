@@ -6,11 +6,14 @@ export class Config {
   options: Options;  
 
   constructor(options?) {
-      if (!Config.config) {
-          Config.config = this;
-          this.options = options;
-          console.log(this.options);
-      }
-      return Config.config;
+    console.log('line 9');
+    console.log(options)
+    if (!Config.config) {
+      Config.config = this;
+      console.log(options)
+      this.options = options;
+      console.log(this.options);
+    }
+    return Config.config;
   }  
 }   

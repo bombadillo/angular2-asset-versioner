@@ -10,7 +10,6 @@ export class FileRenamer {
           console.log(err);
           reject();
         } else {
-          console.log('rename successful');
           fulfill(true);
         }
       });

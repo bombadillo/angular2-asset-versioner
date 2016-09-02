@@ -28,7 +28,6 @@ export class StringInstanceReplacer {
         var results = Promise.all(actions);
 
         results.then(data => {
-          console.log('updated files');
           fulfill(data);
         });       
       });      
@@ -42,7 +41,6 @@ export class StringInstanceReplacer {
           return this.iterateFiles(fileContents);
         })
         .then((fileContents) => {
-          console.log(`updating file ${fileToModify}`);
           this.fileWriter.write(fileToModify, fileContents).then(() => {
             fulfill();
           });             
@@ -51,7 +49,6 @@ export class StringInstanceReplacer {
   }  
 
   iterateFiles = (fileContents) => {
-    console.log('iterating files')
     return new Promise((fulfill, reject) => {
       for (let file of this.filesToReplace) {
         fileContents = this.assetNameReplacer.replace(

@@ -1,8 +1,18 @@
+import { Config } from './config';
+
 var glob = require('glob');
 
 export class FileRetriever {
-  retrieve = (path) => {
-    var options = {ignore: 'node_modules/**'}; 
+
+  config: Config;
+
+  constructor () {
+    this.config = new Config();
+  }
+
+  retrieve = (path) => {    
+    var options = {ignore: ['node_modules/**']}; 
+    options.ignore = options.ignore.concat(this.config.options.excludeFiles);
 
     return new Promise((fulfill, reject) => {
       glob(path, options, function (er, files) {
@@ -10,7 +20,6 @@ export class FileRetriever {
           console.log('err')
           reject();
         } else {
-          console.log('got files')
           fulfill(files);
         }
       });
